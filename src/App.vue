@@ -1,32 +1,86 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+  <div
+    id="app"
+    :style="getBackgroundImage() || null"
+  >
+    <div
+      :class="$style.wrapper"
+    >
+      <the-header />
+      <router-view />
     </div>
-    <router-view/>
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import { mapActions, mapState } from 'vuex'
 
-#nav {
-  padding: 30px;
+import { errorNotification } from './05-components/common'
+import TheHeader from './06-layout/TheHeader'
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+export default {
+  components: { TheHeader },
+  data () {
+    return {}
+  },
+  computed: {
+    ...mapState('main', ['movie'])
+  },
+  methods: {
+    getBackgroundImage () {
+      return {
+        backgroundImage: `url(https://image.tmdb.org/t/p/original${this.movie.backdrop_path || '/d72ROyJqXQtw2OupW0l15eicRAF.jpg'})`,
+        backgroundSize: 'cover',
+        width: '100%',
+        height: '100vh',
+        backgroundColor: 'black'
+      }
+    },
+    ...mapActions('main', ['getMovie'])
+  },
+  async mounted () {
+    try {
+      await this.getMovie()
+    } catch (error) {
+      await errorNotification(error)
     }
   }
+}
+</script>
+
+<style module lang="scss">
+@import url('https://fonts.googleapis.com/css2?family=Cabin&display=swap');
+body  {
+  margin: 0;
+}
+
+a  {
+  text-decoration:none;
+}
+
+li {
+  list-style-type: none; /* Убираем маркеры */
+}
+
+ul {
+  margin: 0;
+}
+#app {
+  font-family: Redacted, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #2c3e50;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-height: 100vh;
+}
+.wrapper {
+  background: linear-gradient(rgba(0,0,0,1), rgba(0,0,0,0.3), rgba(0,0,0,1));
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
 }
 </style>

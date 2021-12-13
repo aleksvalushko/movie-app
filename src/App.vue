@@ -52,6 +52,7 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Cabin&display=swap');
 body  {
   margin: 0;
+  font-family: Cabin, sans-serif;
 }
 
 a  {
@@ -66,7 +67,7 @@ ul {
   margin: 0;
 }
 #app {
-  font-family: Redacted, sans-serif;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;

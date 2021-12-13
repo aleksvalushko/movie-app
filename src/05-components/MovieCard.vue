@@ -18,16 +18,8 @@
         <div>
           {{ getGenresList }}
         </div>
-        <div
-          v-for="item in getProductionCompanies"
-          :key="item.id"
-          :class="$style.productionCompanies"
-        >
-          <img
-            :src="item.logo"
-            alt="no-logo"
-            style="color: black; margin-right: 10px;"
-          />{{ item.name }}
+        <div>
+          {{ getProductionCompanies }}
         </div>
       </div>
       <div>
@@ -69,15 +61,7 @@ export default {
       return this.movie.genres.map(elem => elem.name).join(', ')
     },
     getProductionCompanies () {
-      return this.movie.production_companies.map(elem => {
-        return {
-          id: elem.id,
-          logo: elem.logo_path
-            ? 'https://image.tmdb.org/t/p/original' + elem.logo_path
-            : 'https://img.icons8.com/material-outlined/50/000000/no-image.png',
-          name: elem.name
-        }
-      })
+      return this.movie.production_companies.map(elem => elem.name).join(', ')
     },
     ...mapState('main', ['movie'])
   },

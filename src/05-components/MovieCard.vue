@@ -11,36 +11,46 @@
         {{ getTitle }}
       </div>
       <div>
-        <div>{{ movie.tagline }}</div>
+        <div :class="$style.headline">
+          {{ movie.tagline }}
+        </div>
         <div>{{ movie.overview }}</div>
       </div>
       <div>
-        <div>
+        <div :class="$style.headline">
           {{ getGenresList }}
         </div>
         <div>
           {{ getProductionCompanies }}
         </div>
       </div>
-      <div>
-        <div style="display: flex; justify-content: space-around">
+      <div :class="$style.mainInfoBlock">
+        <div style="width: 70%; display: flex; justify-content: space-between;">
           <div>
-            <div>RELEASE DATE:</div>
+            <div :class="$style.headline">
+              RELEASE DATE:
+            </div>
             <div>{{ movie.release_date }}</div>
           </div>
           <div>
-            <div>RUNTIME:</div>
+            <div :class="$style.headline">
+              RUNTIME:
+            </div>
             <div>{{ movie.runtime }} mins</div>
           </div>
         </div>
-        <div style="display: flex; justify-content: space-around">
+        <div style="width: 70%; display: flex; justify-content: space-between;">
           <div>
-            <div>BOX OFFICE:</div>
-            <div>{{ movie.revenue }}</div>
+            <div :class="$style.headline">
+              BOX OFFICE:
+            </div>
+            <div>{{ getRevenue }}</div>
           </div>
           <div>
-            <div>AVERAGE:</div>
-            <div>{{ movie.vote_average }}/10</div>
+            <div :class="$style.headline">
+              AVERAGE:
+            </div>
+            <div>{{ movie.vote_average }} / 10</div>
           </div>
         </div>
       </div>
@@ -63,6 +73,9 @@ export default {
     getProductionCompanies () {
       return this.movie.production_companies.map(elem => elem.name).join(', ')
     },
+    getRevenue () {
+      return this.movie.revenue?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    },
     ...mapState('main', ['movie'])
   },
   methods: {
@@ -77,28 +90,49 @@ export default {
   background-color: black;
   color: white;
   opacity: .9;
-}
-.poster {
-  width: 50%;
-  img {
-    width: 100%;
-  }
-}
-.description {
-  width: 50%;
-  .title {
-    //color: white;
-  }
-}
+  font-size: 18px;
 
-.productionCompanies {
-  display: flex;
-  align-items: center;
-  margin: 5px 0;
-  img {
-    margin-right: 10px;
-    width: 12%;
-    background-color: white;
+  .poster {
+    width: 50%;
+    img {
+      width: 100%;
+    }
+  }
+
+  .description {
+    width: 50%;
+    height: 60%;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    .title {
+      font-size: 30px;
+    }
+
+    .productionCompanies {
+      display: flex;
+      align-items: center;
+      margin: 5px 0;
+      img {
+        margin-right: 10px;
+        width: 12%;
+        background-color: white;
+      }
+    }
+
+    .mainInfoBlock {
+      height: 40%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+    }
+
+    .headline {
+      color: forestgreen;
+      font-size: 22px;
+      font-weight: bold;
+    }
   }
 }
 </style>

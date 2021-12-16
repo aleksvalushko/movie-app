@@ -1,4 +1,5 @@
 import { Notification } from 'element-ui'
+import Vue from 'vue'
 
 const errorNotification = async (error) => {
   let msg = error.toString()
@@ -15,6 +16,18 @@ const errorNotification = async (error) => {
   })
 }
 
+const createLoading = (title) => {
+  const text = title ?? 'Выполняется запрос'
+  return Vue.prototype.$loading({
+    lock: true,
+    text,
+    spinner: 'el-icon-loading',
+    background: 'rgba(0, 0, 0, 0.7)'
+  })
+}
+
+// eslint-disable-next-line import/no-unused-modules
 export {
-  errorNotification
+  errorNotification,
+  createLoading
 }

@@ -26,7 +26,8 @@ const state = {
     vote_average: null,
     vote_count: null
   },
-  moviesList: []
+  moviesList: [],
+  defaultMovieId: 7131
 }
 
 export default state

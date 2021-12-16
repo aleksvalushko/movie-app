@@ -4,6 +4,8 @@
       <img
         src="../assets/tmdb.svg"
         alt="The movie database"
+        title="To main page"
+        @click="returnToMainPage()"
       />
       <el-select
         v-model="searchValue"
@@ -34,6 +36,8 @@
 <script>
 import { mapActions, mapMutations, mapState } from 'vuex'
 
+import { createLoading } from '../05-components/common'
+
 export default {
   name: 'Header',
   data () {
@@ -45,19 +49,33 @@ export default {
     }
   },
   computed: {
-    ...mapState('main', ['moviesList'])
+    ...mapState('main', ['moviesList', 'defaultMovieId'])
   },
   methods: {
-    async querySearch (queryString) {
-      await this.findMovie(queryString)
+    async returnToMainPage () {
+      await this.getMovie(this.defaultMovieId)
+      if (this.$router.history.current.path !== '/') {
+        await this.$router.push('/')
+      }
     },
-    handleSelect (value) {
-      this.SET_MOVIE(value)
+    async querySearch (queryString) {
+      if (queryString) {
+        await this.findMovie(queryString)
+      }
+    },
+    async handleSelect (value) {
+      const loading = createLoading()
+      if (this.$router.history.current.path !== '/') {
+        await this.$router.push('/')
+      }
+      await this.getMovie(value.id)
       this.searchValue = ''
       this.SET_MOVIES_LIST([])
+      await this.$router.push(`movie/${value.id}`)
+      loading.close()
     },
-    ...mapActions('main', ['findMovie']),
-    ...mapMutations('main', ['SET_MOVIE', 'SET_MOVIES_LIST'])
+    ...mapActions('main', ['findMovie', 'getMovie']),
+    ...mapMutations('main', ['SET_MOVIES_LIST'])
   }
 }
 </script>
@@ -76,6 +94,7 @@ export default {
       align-items: center;
     }
     img {
+      cursor: pointer;
       width: 14%;
     }
     .inlineInput {
@@ -87,6 +106,7 @@ export default {
         border-top: none;
         border-radius: 0;
         font-size: 18px;
+        color: white;
       }
     }
   }

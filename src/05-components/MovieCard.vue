@@ -44,7 +44,7 @@
             <div :class="$style.headline">
               BOX OFFICE:
             </div>
-            <div>{{ getRevenue }}</div>
+            <div>$ {{ getRevenue }}</div>
           </div>
           <div>
             <div :class="$style.headline">
@@ -65,13 +65,13 @@ export default {
   name: 'MovieCard',
   computed: {
     getTitle () {
-      return this.movie.title.toUpperCase()
+      return this.movie.title?.toUpperCase()
     },
     getGenresList () {
-      return this.movie.genres.map(elem => elem.name).join(', ')
+      return this.movie.genres?.map(elem => elem.name).join(', ')
     },
     getProductionCompanies () {
-      return this.movie.production_companies.map(elem => elem.name).join(', ')
+      return this.movie.production_companies?.map(elem => elem.name).join(', ')
     },
     getRevenue () {
       return this.movie.revenue?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
@@ -101,13 +101,12 @@ export default {
 
   .description {
     width: 50%;
-    height: 60%;
     padding: 15px;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
     .title {
       font-size: 30px;
+      margin-bottom: 20px;
     }
 
     .productionCompanies {
@@ -122,7 +121,6 @@ export default {
     }
 
     .mainInfoBlock {
-      height: 40%;
       display: flex;
       flex-direction: column;
       justify-content: space-around;
@@ -132,6 +130,7 @@ export default {
       color: forestgreen;
       font-size: 22px;
       font-weight: bold;
+      margin: 20px 0 10px 0;
     }
   }
 }

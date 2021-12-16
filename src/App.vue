@@ -7,7 +7,8 @@
       :class="$style.wrapper"
     >
       <the-header />
-      <router-view />
+      <movie-card />
+      <the-footer />
     </div>
   </div>
 </template>
@@ -15,16 +16,18 @@
 <script>
 import { mapActions, mapState } from 'vuex'
 
+import MovieCard from './05-components/MovieCard'
 import { errorNotification } from './05-components/common'
+import TheFooter from './06-layout/TheFooter'
 import TheHeader from './06-layout/TheHeader'
 
 export default {
-  components: { TheHeader },
+  components: { MovieCard, TheHeader, TheFooter },
   data () {
     return {}
   },
   computed: {
-    ...mapState('main', ['movie'])
+    ...mapState('main', ['movie', 'defaultMovieId'])
   },
   methods: {
     getBackgroundImage () {
@@ -40,7 +43,10 @@ export default {
   },
   async mounted () {
     try {
-      await this.getMovie()
+      if (this.$router.history.current.path !== '/') {
+        await this.$router.push('/')
+      }
+      await this.getMovie(this.defaultMovieId)
     } catch (error) {
       await errorNotification(error)
     }

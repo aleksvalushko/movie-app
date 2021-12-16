@@ -85,7 +85,7 @@ export default {
 
 <style module lang="scss">
 .movieCard {
-  width: 60%;
+  width: 50%;
   display: flex;
   background-color: black;
   color: white;

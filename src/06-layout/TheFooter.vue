@@ -2,15 +2,11 @@
   <div :class="$style.theFooter">
     <div :class="$style.theFooterBlock">
       <a
-        href="https://github.com/SKempin/reactjs-tmdb-app"
-        title="View Github Repo"
+        href="https://www.linkedin.com/in/aleksvalushko/"
+        title="Developer"
         style="color: white;"
       >
-        <img
-          src="../assets/github_icon.svg"
-          alt="gitHub"
-        />
-        <span>View Code on GitHub</span>
+        Developed by Aleks Valushko
       </a>
     </div>
   </div>

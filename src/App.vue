@@ -89,5 +89,8 @@ ul {
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+  @media screen and (max-width: 670px){
+    height: auto;
+  }
 }
 </style>

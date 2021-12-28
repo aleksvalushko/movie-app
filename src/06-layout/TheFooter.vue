@@ -1,15 +1,31 @@
 <template>
-  <div :class="$style.theFooter">
+  <el-footer :class="$style.theFooter">
     <div :class="$style.theFooterBlock">
-      <a
+      <span>Developed by Aleks Valushko</span>
+      <el-link
         href="https://www.linkedin.com/in/aleksvalushko/"
-        title="Developer"
-        style="color: white;"
+        title="LinkedIn"
+        :underline="false"
+        :class="$style.link"
       >
-        Developed by Aleks Valushko
-      </a>
+        Link to LinkedIn <img
+          src="../assets/linkedin.png"
+          alt="LinkedIn"
+        />
+      </el-link>
+      <el-link
+        href="https://github.com/aleksvalushko/movie-app"
+        title="GitHub"
+        :underline="false"
+        :class="$style.link"
+      >
+        Link to GitHub <img
+          src="../assets/github.png"
+          alt="LinkedIn"
+        />
+      </el-link>
     </div>
-  </div>
+  </el-footer>
 </template>
 
 <script>
@@ -23,14 +39,32 @@ export default {
   width: 100%;
   display: flex;
   justify-content: center;
+  margin-bottom: 10px;
+
   .theFooterBlock {
     width: 80%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-around;
     align-items: center;
-    img {
-      width: 10%;
-      margin-right: 10px;
+    color: white;
+
+    :global(.el-link.el-link--default:hover) {
+      color: forestgreen;
+    }
+
+    .link {
+      color: white;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 5px 0;
+
+      img {
+        width: 3%;
+        margin-right: 10px;
+      }
     }
   }
 }

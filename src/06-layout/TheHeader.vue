@@ -1,5 +1,5 @@
 <template>
-  <div :class="$style.theHeader">
+  <el-header :class="$style.theHeader">
     <div :class="$style.headerBlock">
       <img
         src="../assets/tmdb.svg"
@@ -30,7 +30,7 @@
         />
       </el-select>
     </div>
-  </div>
+  </el-header>
 </template>
 
 <script>
@@ -96,6 +96,9 @@ export default {
     img {
       cursor: pointer;
       width: 14%;
+      @media screen and (max-width: 670px){
+        width: 25%;
+      }
     }
     .inlineInput {
       width: 50%;
@@ -107,6 +110,9 @@ export default {
         border-radius: 0;
         font-size: 18px;
         color: white;
+        @media screen and (max-width: 670px){
+          font-size: 16px;
+        }
       }
     }
   }

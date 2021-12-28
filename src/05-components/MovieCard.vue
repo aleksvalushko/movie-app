@@ -25,7 +25,7 @@
         </div>
       </div>
       <div :class="$style.mainInfoBlock">
-        <div style="width: 70%; display: flex; justify-content: space-between;">
+        <div style="width: 90%; display: flex; justify-content: space-between;">
           <div>
             <div :class="$style.headline">
               RELEASE DATE:
@@ -39,7 +39,7 @@
             <div>{{ movie.runtime }} mins</div>
           </div>
         </div>
-        <div style="width: 70%; display: flex; justify-content: space-between;">
+        <div style="width: 90%; display: flex; justify-content: space-between;">
           <div>
             <div :class="$style.headline">
               BOX OFFICE:
@@ -90,23 +90,40 @@ export default {
   background-color: black;
   color: white;
   opacity: .9;
-  font-size: 18px;
+  font-size: 16px;
+  @media screen and (max-width: 1200px){
+    width: 60%;
+  }
+  @media screen and (max-width: 1000px){
+    width: 70%;
+  }
+  @media screen and (max-width: 850px){
+    width: 80%;
+  }
+  @media screen and (max-width: 670px){
+    width: 70%;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
+  }
 
   .poster {
     width: 50%;
     img {
       width: 100%;
     }
+    @media screen and (max-width: 670px){
+      width: 100%;
+    }
   }
 
   .description {
     width: 50%;
-    padding: 15px;
+    padding: 0 15px;
     display: flex;
     flex-direction: column;
     .title {
       font-size: 30px;
-      margin-bottom: 20px;
     }
 
     .productionCompanies {
@@ -123,7 +140,6 @@ export default {
     .mainInfoBlock {
       display: flex;
       flex-direction: column;
-      justify-content: space-around;
     }
 
     .headline {
@@ -131,6 +147,9 @@ export default {
       font-size: 22px;
       font-weight: bold;
       margin: 20px 0 10px 0;
+    }
+    @media screen and (max-width: 670px){
+      width: 90%;
     }
   }
 }
